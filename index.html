@@ -2,109 +2,185 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#080808">
-  <meta name="description" content="ليلة مميزة وتهنئة خاصة بعيد ميلاد نور الدين — 22 نوفمبر 2026.">
-  <meta property="og:title" content="كل سنة وأنت طيب يا نور الدين">
-  <meta property="og:description" content="مفاجأة صغيرة في يوم كبير ومميز ✨">
-  <title>عيد ميلاد سعيد يا نور الدين ✦</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090908">
+  <meta name="description" content="احتفال خاص بعيد ميلاد نور الدين — 22 نوفمبر 2026.">
+  <meta property="og:title" content="إلى نور الدين | يومك المميز">
+  <meta property="og:description" content="حكاية صغيرة من الذكريات، ورسالة كبيرة من القلب.">
+  <title>إلى نور الدين — يومك المميز</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=3">
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=4">
 </head>
 <body>
-  <a class="skip-link" href="#main">انتقل إلى المحتوى</a>
-  <div class="ambient ambient-one" aria-hidden="true"></div>
-  <div class="ambient ambient-two" aria-hidden="true"></div>
-  <canvas id="confetti" aria-hidden="true"></canvas>
+  <div class="page-grain" aria-hidden="true"></div>
+  <div class="page-glow page-glow-one" aria-hidden="true"></div>
+  <div class="page-glow page-glow-two" aria-hidden="true"></div>
 
-  <header class="topbar">
-    <a class="brand" href="#home" aria-label="العودة إلى البداية"><span class="brand-mark">N</span><span>ليلة نور الدين</span></a>
-    <nav class="nav-links" aria-label="التنقل الرئيسي">
-      <a href="#countdownSection">العد التنازلي</a>
+  <header class="site-header">
+    <a class="wordmark" href="#home" aria-label="بداية الصفحة">
+      <span class="wordmark-symbol">N</span>
+      <span class="wordmark-text">حكاية <b>نور الدين</b></span>
+    </a>
+    <nav class="main-nav" aria-label="التنقل الرئيسي">
+      <a href="#countdown">العد التنازلي</a>
       <a href="#memories">الذكريات</a>
-      <a href="#surprise">المفاجأة</a>
+      <a href="#letter-section">رسالة ليك</a>
     </nav>
-    <button class="music-toggle" id="musicToggle" type="button" aria-pressed="false"><span class="music-icon">♫</span><span id="musicLabel">تشغيل الموسيقى</span></button>
+    <button class="sound-button" id="musicToggle" type="button" aria-pressed="false">
+      <span class="sound-bars" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span id="musicLabel">شغّل الموسيقى</span>
+    </button>
   </header>
 
-  <main id="main">
-    <section class="hero section" id="home">
-      <div class="hero-content">
-        <div class="eyebrow"><span class="dot"></span> يوم استثنائي لشخص استثنائي</div>
-        <p class="small-title">في يوم زي ده، الدنيا بقت أحلى...</p>
-        <h1>عيد ميلاد<br><span class="gold-text">نور الدين</span></h1>
-        <p class="hero-copy">مش مجرد يوم عادي؛ دي حكاية شخص غالي، وضحكة بتنوّر المكان، وسنة جديدة نتمنى تكون أجمل من كل اللي فات.</p>
-        <div class="hero-actions">
-          <a class="button button-gold" href="#surprise">افتح مفاجأتك <span>✦</span></a>
-          <a class="button button-ghost" href="#memories">شوف الذكريات</a>
+  <main id="home">
+    <section class="hero-shell">
+      <div class="hero-copy reveal">
+        <div class="overline"><span class="overline-line"></span> 22 NOVEMBER 2026 <span class="overline-line"></span></div>
+        <p class="hero-pretitle">في يوم اتكتب علشان يكون مميز...</p>
+        <h1>كل سنة<br>وأنت <em>طيب</em><br><span class="hero-name">يا نور الدين</span></h1>
+        <p class="hero-description">مش كل الأيام شبه بعض؛ فيه أيام بنحتفل فيها بوجود ناس بتضيف للحياة معنى. والنهارده يومك أنت.</p>
+        <div class="hero-buttons">
+          <a class="primary-button" href="#memories">ابدأ الحكاية <span>↙</span></a>
+          <a class="text-button" href="#letter-section">رسالة مخصوصة <span>✳</span></a>
         </div>
-        <div class="hero-date"><span>22</span><i></i><span>11</span><i></i><span>2026</span></div>
+        <div class="hero-signature"><span class="signature-rule"></span><span>يومك، ذكرياتك، وفرحتك</span></div>
       </div>
-      <div class="hero-decoration" aria-hidden="true"><div class="orbit orbit-a"></div><div class="orbit orbit-b"></div><span class="hero-star star-a">✦</span><span class="hero-star star-b">✧</span><span class="hero-star star-c">✦</span></div>
-      <a class="scroll-hint" href="#countdownSection">اكتشف المفاجأة <span>↓</span></a>
+
+      <div class="hero-portrait reveal">
+        <div class="portrait-frame">
+          <img src="images/photo-1.jpg" alt="صورة من ذكريات نور الدين" fetchpriority="high">
+          <div class="portrait-shade"></div>
+          <div class="portrait-caption">
+            <span>THE DAY IS YOURS</span>
+            <b>لحظة تستاهل تتوثّق</b>
+          </div>
+          <span class="portrait-number">01 <i>/</i> 06</span>
+        </div>
+        <div class="portrait-stamp"><span>HAPPY</span><b>DAY</b><i>✳</i></div>
+        <span class="floating-star star-top">✳</span>
+        <span class="floating-star star-bottom">✧</span>
+      </div>
+
+      <a class="hero-scroll" href="#countdown"><span></span> انزل واكتشف</a>
     </section>
 
-    <section class="countdown-section section" id="countdownSection">
-      <div class="section-heading"><span class="kicker">THE BIG DAY</span><h2>اللحظة المنتظرة قربت</h2><p>نستقبل يومك بكل فرحة وحب</p></div>
-      <div class="countdown" id="countdown" aria-live="polite">
-        <div class="time-card"><strong id="days">00</strong><span>يوم</span></div>
-        <div class="time-card"><strong id="hours">00</strong><span>ساعة</span></div>
-        <div class="time-card"><strong id="minutes">00</strong><span>دقيقة</span></div>
-        <div class="time-card"><strong id="seconds">00</strong><span>ثانية</span></div>
+    <section class="countdown-section content-width" id="countdown">
+      <div class="section-intro reveal">
+        <span class="section-index">01 — THE COUNTDOWN</span>
+        <h2>لحظات على <em>يومك الكبير</em></h2>
+        <p>كل ثانية بتقرّبنا من بداية سنة جديدة في حكايتك.</p>
       </div>
-      <p class="countdown-note" id="countdownNote">كل ثانية بتقربنا من يوم مليان فرحة ✨</p>
+      <div class="countdown-panel reveal">
+        <div class="countdown-topline"><span>UNTIL YOUR DAY</span><span class="live-dot">● <b>LIVE COUNTDOWN</b></span></div>
+        <div class="countdown-grid" id="countdown" aria-live="polite">
+          <div class="count-unit"><strong id="days">00</strong><span>يوم</span></div>
+          <div class="count-separator">:</div>
+          <div class="count-unit"><strong id="hours">00</strong><span>ساعة</span></div>
+          <div class="count-separator">:</div>
+          <div class="count-unit"><strong id="minutes">00</strong><span>دقيقة</span></div>
+          <div class="count-separator">:</div>
+          <div class="count-unit"><strong id="seconds">00</strong><span>ثانية</span></div>
+        </div>
+        <p class="countdown-message" id="countdownNote">العدّ شغّال... والفرحة قربت ✨</p>
+      </div>
     </section>
 
-    <section class="memories-section section" id="memories">
-      <div class="section-heading"><span class="kicker">A LITTLE GALLERY</span><h2>حكايات وصور بتفضل في القلب</h2><p>كل صورة وراها ذكرى تستاهل نفتكرها</p></div>
-      <div class="gallery">
-        <button class="photo-card photo-large" type="button" data-full="images/photo-1.jpg" aria-label="عرض الصورة الأولى"><img src="images/photo-1.jpg" alt="ذكرى جميلة لنور الدين" loading="lazy"><span>لحظة ما تتنسيش <b>↗</b></span></button>
-        <button class="photo-card" type="button" data-full="images/photo-2.jpg" aria-label="عرض الصورة الثانية"><img src="images/photo-2.jpg" alt="أحلى صحبة" loading="lazy"><span>أحلى صحبة <b>↗</b></span></button>
-        <button class="photo-card" type="button" data-full="images/photo-3.jpg" aria-label="عرض الصورة الثالثة"><img src="images/photo-3.jpg" alt="ضحكة من القلب" loading="lazy"><span>ضحكة من القلب <b>↗</b></span></button>
-        <button class="photo-card" type="button" data-full="images/photo-4.jpg" aria-label="عرض الصورة الرابعة"><img src="images/photo-4.jpg" alt="أيام لا تُنسى" loading="lazy"><span>أيام لا تُنسى <b>↗</b></span></button>
-        <button class="photo-card" type="button" data-full="images/photo-5.jpg" aria-label="عرض الصورة الخامسة"><img src="images/photo-5.jpg" alt="ذكرى مميزة" loading="lazy"><span>ذكرى مميزة <b>↗</b></span></button>
-        <button class="photo-card" type="button" data-full="images/photo-6.jpg" aria-label="عرض الصورة السادسة"><img src="images/photo-6.jpg" alt="نور الدين" loading="lazy"><span>ذكريات العمر <b>↗</b></span></button>
+    <section class="memories-section content-width" id="memories">
+      <div class="section-intro section-intro-centered reveal">
+        <span class="section-index">02 — THE MEMORIES</span>
+        <h2>تفاصيل صغيرة،<br><em>ذكريات كبيرة</em></h2>
+        <p>كل صورة حكاية، وكل حكاية ليها مكانها.</p>
       </div>
-      <p class="gallery-note">اضغط على أي صورة لمشاهدتها بالحجم الكبير ✨</p>
+      <div class="gallery-grid">
+        <button class="memory-card memory-card-tall reveal" type="button" data-gallery-index="0" data-full="images/photo-1.jpg" aria-label="عرض الصورة الأولى">
+          <img src="images/photo-1.jpg" alt="ذكرى نور الدين الأولى" loading="lazy">
+          <span class="memory-shade"></span><span class="memory-meta"><small>MEMORY 01</small><b>بداية حكاية جميلة</b><i>↗</i></span>
+        </button>
+        <button class="memory-card reveal" type="button" data-gallery-index="1" data-full="images/photo-2.jpg" aria-label="عرض الصورة الثانية">
+          <img src="images/photo-2.jpg" alt="ذكرى نور الدين الثانية" loading="lazy">
+          <span class="memory-shade"></span><span class="memory-meta"><small>MEMORY 02</small><b>تفصيلة من القلب</b><i>↗</i></span>
+        </button>
+        <button class="memory-card reveal" type="button" data-gallery-index="2" data-full="images/photo-3.jpg" aria-label="عرض الصورة الثالثة">
+          <img src="images/photo-3.jpg" alt="ذكرى نور الدين الثالثة" loading="lazy">
+          <span class="memory-shade"></span><span class="memory-meta"><small>MEMORY 03</small><b>لحظة حلوة</b><i>↗</i></span>
+        </button>
+        <button class="memory-card reveal" type="button" data-gallery-index="3" data-full="images/photo-4.jpg" aria-label="عرض الصورة الرابعة">
+          <img src="images/photo-4.jpg" alt="ذكرى نور الدين الرابعة" loading="lazy">
+          <span class="memory-shade"></span><span class="memory-meta"><small>MEMORY 04</small><b>من الأيام الجميلة</b><i>↗</i></span>
+        </button>
+        <button class="memory-card memory-card-wide reveal" type="button" data-gallery-index="4" data-full="images/photo-5.jpg" aria-label="عرض الصورة الخامسة">
+          <img src="images/photo-5.jpg" alt="ذكرى نور الدين الخامسة" loading="lazy">
+          <span class="memory-shade"></span><span class="memory-meta"><small>MEMORY 05</small><b>ذكرى تستاهل تفضل</b><i>↗</i></span>
+        </button>
+        <button class="memory-card reveal" type="button" data-gallery-index="5" data-full="images/photo-6.jpg" aria-label="عرض الصورة السادسة">
+          <img src="images/photo-6.jpg" alt="ذكرى نور الدين السادسة" loading="lazy">
+          <span class="memory-shade"></span><span class="memory-meta"><small>MEMORY 06</small><b>والأحلى لسه جاي</b><i>↗</i></span>
+        </button>
+      </div>
+      <div class="gallery-footnote"><span>اسحب بعينك بين الذكريات</span><span>اضغط على الصورة لتكبيرها ↗</span></div>
     </section>
 
-    <section class="message-section section" id="surprise">
-      <div class="section-heading"><span class="kicker">A SPECIAL SURPRISE</span><h2>رسالة مخصوصة ليك يا نور</h2><p>فيه كلام حلو مستنيك... افتح هديتك</p></div>
-      <button class="gift-wrap" id="giftButton" type="button" aria-expanded="false" aria-controls="letter">
-        <span class="gift-glow"></span><span class="gift-box" aria-hidden="true">🎁</span><span class="gift-label">اضغط لفتح الهدية</span>
-      </button>
-      <article class="letter" id="letter" hidden>
-        <div class="letter-icon">✦</div><h3>إلى نور الدين</h3>
-        <p>كل سنة وأنت طيب يا نور الدين! أتمنى لك سنة جديدة مليانة نجاح وراحة بال وضحك وذكريات حلوة. ربنا يحقق لك اللي بتتمناه، ويفتح لك كل أبواب الخير، وتفضل دايمًا منوّر حياة اللي حواليك. تستاهل كل حاجة جميلة، ويارب أيامك الجاية تكون أحلى وأجمل. 🎂</p>
-        <span class="letter-sign">مع أطيب الأمنيات والمحبة ♥</span>
+    <section class="letter-section" id="letter-section">
+      <div class="letter-orbit" aria-hidden="true"></div>
+      <div class="letter-content reveal">
+        <span class="section-index">03 — A NOTE FOR YOU</span>
+        <p class="letter-eyebrow">كلمتين من القلب</p>
+        <h2>فيه رسالة<br><em>مستنياك يا نور</em></h2>
+        <p class="letter-lead">مش لازم الهدية تكون كبيرة... ساعات كلمة حلوة بتفضل معانا كتير.</p>
+        <button class="gift-button" id="giftButton" type="button" aria-expanded="false" aria-controls="letter">
+          <span class="gift-icon" aria-hidden="true">✉</span>
+          <span id="giftLabel">افتح رسالتك</span>
+          <span class="gift-arrow" aria-hidden="true">↗</span>
+        </button>
+      </div>
+      <article class="letter-paper" id="letter" hidden>
+        <span class="paper-top">A LITTLE NOTE FOR NOUR</span>
+        <span class="paper-star">✳</span>
+        <h3>إلى نور الدين،</h3>
+        <p>كل سنة وأنت طيب يا نور! أتمنى لك سنة جديدة مليانة نجاح وراحة بال وضحك وذكريات حلوة. ربنا يحقق لك اللي بتتمناه، ويفتح لك كل أبواب الخير، وتفضل دايمًا منوّر حياة اللي حواليك. تستاهل كل حاجة جميلة، ويارب أيامك الجاية تكون أحلى من كل اللي فات. 🎂</p>
+        <span class="paper-signature">كل سنة وأنت بخير ♥</span>
       </article>
     </section>
 
-    <section class="wishes-section section">
-      <div class="section-heading"><span class="kicker">MAKE A WISH</span><h2>أمنية للسنة الجديدة</h2><p>فكّر في أمنية جميلة وخلي السنة دي بداية لحاجات أحلى</p></div>
-      <div class="cake" aria-hidden="true">🎂</div>
-      <button class="button button-gold" id="wishButton" type="button">أطلق الأمنيات ✨</button>
-      <p class="wish-result" id="wishResult" aria-live="polite"></p>
+    <section class="wish-section content-width">
+      <div class="wish-card reveal">
+        <span class="wish-spark">✧</span>
+        <span class="section-index">04 — MAKE A WISH</span>
+        <h2>اتمنى أمنية...<br><em>والباقي على ربنا</em></h2>
+        <p>سنة جديدة، فرص جديدة، وأيام أجمل بإذن الله.</p>
+        <button class="wish-button" id="wishButton" type="button">أطلق أمنيتك <span>✦</span></button>
+        <p class="wish-result" id="wishResult" aria-live="polite"></p>
+      </div>
     </section>
 
-    <section class="final-section section">
-      <div class="final-stars" aria-hidden="true">✦　✧　✦</div>
-      <p class="final-kicker">ONE MORE THING...</p>
-      <h2>كل سنة وأنت طيب<br><span class="gold-text">يا نور الدين</span></h2>
-      <p>سنة جديدة، حكايات أجمل، ونجاحات أكبر. أتمنى لك أيامًا تشبه قلبك الجميل.</p>
-      <button class="button button-ghost" id="shareButton" type="button">شارك التهنئة ↗</button>
+    <section class="closing-section">
+      <div class="closing-rule"></div>
+      <span class="closing-kicker">A NEW CHAPTER BEGINS</span>
+      <h2>كل سنة وأنت<br><em>حكاية حلوة</em></h2>
+      <p>يا رب تكون سنتك الجديدة مليانة طمأنينة ونجاح وفرح ما يخلصش.</p>
+      <button class="share-button" id="shareButton" type="button">شارك التهنئة <span>↗</span></button>
+      <div class="closing-date">22 <i>·</i> 11 <i>·</i> 2026</div>
     </section>
   </main>
 
-  <div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="عرض الصورة">
-    <button class="lightbox-close" id="lightboxClose" type="button" aria-label="إغلاق الصورة">×</button>
-    <img id="lightboxImage" src="" alt="صورة من الذكريات">
+  <div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="معرض الصور">
+    <button class="lightbox-close" id="lightboxClose" type="button" aria-label="إغلاق">×</button>
+    <button class="lightbox-arrow lightbox-prev" id="lightboxPrev" type="button" aria-label="الصورة السابقة">‹</button>
+    <figure><img id="lightboxImage" src="" alt=""><figcaption id="lightboxCaption"></figcaption></figure>
+    <button class="lightbox-arrow lightbox-next" id="lightboxNext" type="button" aria-label="الصورة التالية">›</button>
+    <span class="lightbox-count" id="lightboxCount">01 / 06</span>
   </div>
 
-  <footer><span>صُنعت بمحبة خصيصًا ليوم نور الدين</span><b>♥</b><small>22 · 11 · 2026</small></footer>
-  <audio id="birthdayAudio" src="birthday.mp3" preload="auto" autoplay loop playsinline></audio>
-  <script src="script.js?v=3"></script>
+  <footer class="site-footer">
+    <a class="footer-mark" href="#home">N.</a>
+    <span>اتعملت بمحبة علشان يومك يكون مختلف</span>
+    <span class="footer-heart">♥</span>
+  </footer>
+
+  <canvas id="confetti" aria-hidden="true"></canvas>
+  <audio id="birthdayAudio" src="birthday.mp3" preload="none" loop></audio>
+  <script src="script.js?v=4"></script>
 </body>
 </html>
