@@ -245,3 +245,15 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold-light);outline
 .hero-visual-placeholder b{font:italic 64px Georgia,serif;letter-spacing:7px}
 .hero-visual-placeholder small{font:9px Georgia,serif;letter-spacing:3px;color:#bda16b;direction:ltr}
 @media(max-width:650px){.hero-visual-placeholder{width:min(78%,340px);height:350px}}
+
+
+/* Decorative hero artwork: photo-free version */
+.hero-ornament{position:relative;width:min(100%,430px);min-height:510px;display:grid;place-content:center;justify-items:center;gap:24px;overflow:hidden;border:1px solid rgba(225,195,130,.38);background:radial-gradient(circle at 50% 45%,rgba(198,156,67,.16),transparent 42%),linear-gradient(145deg,#17140e,#090908 68%);box-shadow:0 30px 90px #0008}
+.hero-ornament:before,.hero-ornament:after{content:"";position:absolute;width:75%;aspect-ratio:1;border:1px solid rgba(225,195,130,.13);border-radius:50%}
+.hero-ornament:after{width:58%;border-color:rgba(225,195,130,.2)}
+.ornament-ring{position:relative;z-index:1;width:190px;aspect-ratio:1;border:1px solid #c8a15d;border-radius:50%;display:grid;place-items:center;box-shadow:0 0 0 12px rgba(200,161,93,.04),0 0 70px rgba(200,161,93,.12)}
+.ornament-ring span{font:italic 130px Georgia,serif;color:#e6ce9b;text-shadow:0 0 35px rgba(230,206,155,.2)}
+.ornament-ring i{position:absolute;top:14px;right:17px;color:#e6ce9b;font-style:normal;font-size:22px}
+.hero-ornament>p{position:relative;z-index:1;color:#bda574;font:10px Georgia,serif;letter-spacing:4px;direction:ltr}
+@media(max-width:760px){.hero-ornament{min-height:390px;width:min(76%,340px)}.ornament-ring{width:155px}.ornament-ring span{font-size:105px}}
+@media(max-width:420px){.hero-ornament{min-height:330px;width:82%}.ornament-ring{width:130px}.ornament-ring span{font-size:88px}}
