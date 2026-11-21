@@ -236,3 +236,12 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold-light);outline
   *,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
   .reveal{opacity:1;transform:none}
 }
+/* Photo-free hero visual */
+.hero-visual-placeholder{position:relative;justify-self:center;width:min(100%,390px);height:430px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:13px;border:1px solid rgba(225,195,130,.55);background:radial-gradient(ellipse at center,#302515 0%,#17130c 48%,#0d0c09 100%);box-shadow:inset 0 0 0 9px #17140e,0 30px 90px #0009;color:#e8d39e}
+.hero-visual-placeholder:before,.hero-visual-placeholder:after{content:"";position:absolute;width:55px;height:55px;border-color:#ead39b}
+.hero-visual-placeholder:before{top:0;right:0;border-top:1px solid;border-right:1px solid}
+.hero-visual-placeholder:after{bottom:0;left:0;border-bottom:1px solid;border-left:1px solid}
+.hero-visual-placeholder span{font-size:44px}
+.hero-visual-placeholder b{font:italic 64px Georgia,serif;letter-spacing:7px}
+.hero-visual-placeholder small{font:9px Georgia,serif;letter-spacing:3px;color:#bda16b;direction:ltr}
+@media(max-width:650px){.hero-visual-placeholder{width:min(78%,340px);height:350px}}
