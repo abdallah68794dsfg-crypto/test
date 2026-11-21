@@ -49,15 +49,19 @@ async function startMusic() {
 }
 startMusic();
 let triedGesture = false;
-async function resumeAfterGesture() {
-  if (triedGesture || !audio.paused) return;
+async function resumeAfterGesture(event) {
+  if (musicButton.contains(event.target) || triedGesture || !audio.paused) return;
   triedGesture = true;
-  await startMusic();
-  window.removeEventListener("pointerdown", resumeAfterGesture);
-  window.removeEventListener("keydown", resumeAfterGesture);
+  const started = await startMusic();
+  if (started) {
+    window.removeEventListener("pointerdown", resumeAfterGesture);
+    window.removeEventListener("keydown", resumeAfterGesture);
+  } else {
+    triedGesture = false;
+  }
 }
-window.addEventListener("pointerdown", resumeAfterGesture, { once: true });
-window.addEventListener("keydown", resumeAfterGesture, { once: true });
+window.addEventListener("pointerdown", resumeAfterGesture);
+window.addEventListener("keydown", resumeAfterGesture);
 musicButton.addEventListener("click", async () => {
   if (audio.paused) {
     const ok = await startMusic();
