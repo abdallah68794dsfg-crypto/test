@@ -88,59 +88,6 @@ giftButton.addEventListener("click", () => {
   }
 });
 
-// Gallery lightbox with keyboard and arrow navigation.
-const galleryCards = Array.from(document.querySelectorAll(".memory-card"));
-const lightbox = byId("lightbox");
-const lightboxImage = byId("lightboxImage");
-const lightboxCaption = byId("lightboxCaption");
-const lightboxCount = byId("lightboxCount");
-const closeButton = byId("lightboxClose");
-let currentImageIndex = 0;
-let previouslyFocused = null;
-
-function showGalleryImage(index) {
-  if (!galleryCards.length) return;
-  currentImageIndex = (index + galleryCards.length) % galleryCards.length;
-  const card = galleryCards[currentImageIndex];
-  const image = card.querySelector("img");
-  lightboxImage.src = card.dataset.full || image.src;
-  lightboxImage.alt = image.alt;
-  const caption = card.querySelector(".memory-meta b");
-  lightboxCaption.textContent = caption ? caption.textContent : image.alt;
-  lightboxCount.textContent = String(currentImageIndex + 1).padStart(2, "0") +
-    " / " + String(galleryCards.length).padStart(2, "0");
-}
-function openGallery(index, card) {
-  previouslyFocused = card;
-  showGalleryImage(index);
-  lightbox.hidden = false;
-  closeButton.focus();
-  document.body.style.overflow = "hidden";
-}
-function closeGallery() {
-  lightbox.hidden = true;
-  lightboxImage.src = "";
-  document.body.style.overflow = "";
-  if (previouslyFocused) previouslyFocused.focus();
-}
-galleryCards.forEach((card, index) => {
-  card.addEventListener("click", () => openGallery(index, card));
-  const image = card.querySelector("img");
-  image.addEventListener("error", () => card.classList.add("image-missing"));
-});
-closeButton.addEventListener("click", closeGallery);
-byId("lightboxPrev").addEventListener("click", () => showGalleryImage(currentImageIndex - 1));
-byId("lightboxNext").addEventListener("click", () => showGalleryImage(currentImageIndex + 1));
-lightbox.addEventListener("click", (event) => {
-  if (event.target === lightbox) closeGallery();
-});
-document.addEventListener("keydown", (event) => {
-  if (lightbox.hidden) return;
-  if (event.key === "Escape") closeGallery();
-  if (event.key === "ArrowLeft") showGalleryImage(currentImageIndex + 1);
-  if (event.key === "ArrowRight") showGalleryImage(currentImageIndex - 1);
-});
-
 // Wishes and celebration
 byId("wishButton").addEventListener("click", () => {
   byId("wishResult").textContent = "يا رب تكون سنة كلها خير ونجاح وأخبار تفرّح قلبك يا نور! ✨";
