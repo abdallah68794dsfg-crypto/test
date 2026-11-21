@@ -1,137 +1,165 @@
 "use strict";
-const $ = (id) => document.getElementById(id);
-const birthday = new Date(2026, 10, 22, 0, 0, 0);
-const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const byId = (id) => document.getElementById(id);
+const birthdayDate = new Date(2026, 10, 22, 0, 0, 0);
+const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+// Countdown
 function updateCountdown() {
-  const diff = birthday.getTime() - Date.now();
-  if (diff <= 0) {
-    ["days", "hours", "minutes", "seconds"].forEach(id => { $(id).textContent = "00"; });
-    $("countdownNote").textContent = "النهارده يومك يا نور الدين! كل سنة وأنت طيب 🎉";
+  const remaining = birthdayDate.getTime() - Date.now();
+  const note = byId("countdownNote");
+  if (remaining <= 0) {
+    ["days", "hours", "minutes", "seconds"].forEach((id) => { byId(id).textContent = "00"; });
+    note.textContent = "النهارده يومك يا نور الدين! كل سنة وأنت طيب 🎉";
     return;
   }
-  const values = {
-    days: Math.floor(diff / 86400000),
-    hours: Math.floor((diff % 86400000) / 3600000),
-    minutes: Math.floor((diff % 3600000) / 60000),
-    seconds: Math.floor((diff % 60000) / 1000)
+  const units = {
+    days: Math.floor(remaining / 86400000),
+    hours: Math.floor((remaining % 86400000) / 3600000),
+    minutes: Math.floor((remaining % 3600000) / 60000),
+    seconds: Math.floor((remaining % 60000) / 1000)
   };
-  Object.entries(values).forEach(([id, value]) => { $(id).textContent = String(value).padStart(2, "0"); });
+  Object.entries(units).forEach(([id, value]) => {
+    byId(id).textContent = String(value).padStart(2, "0");
+  });
 }
 updateCountdown();
 window.setInterval(updateCountdown, 1000);
 
-// Music: attempt autoplay, then resume after the visitor's first interaction if the browser blocks it.
-const audio = $("birthdayAudio");
-const musicButton = $("musicToggle");
-const musicLabel = $("musicLabel");
-function syncMusicButton() {
+// Music is started only after a clear visitor action because browsers may block autoplay.
+const audio = byId("birthdayAudio");
+const musicButton = byId("musicToggle");
+const musicLabel = byId("musicLabel");
+
+function syncMusicState() {
   const playing = !audio.paused;
   musicButton.setAttribute("aria-pressed", String(playing));
-  musicLabel.textContent = playing ? "إيقاف الموسيقى" : "تشغيل الموسيقى";
+  musicLabel.textContent = playing ? "إيقاف الموسيقى" : "شغّل الموسيقى";
 }
-audio.addEventListener("play", syncMusicButton);
-audio.addEventListener("pause", syncMusicButton);
+audio.addEventListener("play", syncMusicState);
+audio.addEventListener("pause", syncMusicState);
 audio.addEventListener("error", () => {
-  musicLabel.textContent = "الصوت غير متاح";
-  musicButton.title = "تأكد من وجود birthday.mp3 بجوار index.html";
+  musicLabel.textContent = "الموسيقى غير مضافة";
+  musicButton.title = "أضف ملف birthday.mp3 بجوار index.html داخل المستودع";
 });
-async function startMusic() {
-  if (!audio.paused) return true;
+musicButton.addEventListener("click", async () => {
+  if (!audio.paused) {
+    audio.pause();
+    return;
+  }
   try {
     await audio.play();
-    syncMusicButton();
-    return true;
+    syncMusicState();
   } catch {
-    syncMusicButton();
-    return false;
-  }
-}
-startMusic();
-let triedGesture = false;
-async function resumeAfterGesture(event) {
-  if (musicButton.contains(event.target) || triedGesture || !audio.paused) return;
-  triedGesture = true;
-  const started = await startMusic();
-  if (started) {
-    window.removeEventListener("pointerdown", resumeAfterGesture);
-    window.removeEventListener("keydown", resumeAfterGesture);
-  } else {
-    triedGesture = false;
-  }
-}
-window.addEventListener("pointerdown", resumeAfterGesture);
-window.addEventListener("keydown", resumeAfterGesture);
-musicButton.addEventListener("click", async () => {
-  if (audio.paused) {
-    const ok = await startMusic();
-    if (!ok) musicLabel.textContent = "تعذر تشغيل الصوت";
-  } else {
-    audio.pause();
+    musicLabel.textContent = "تعذر تشغيل الموسيقى";
   }
 });
 
-// Open and close the birthday letter.
-const giftButton = $("giftButton");
-const letter = $("letter");
+// Reveal elements gently as they enter the screen.
+const revealItems = document.querySelectorAll(".reveal");
+if ("IntersectionObserver" in window && !reducedMotion) {
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: "0px 0px -35px 0px" });
+  revealItems.forEach((item) => revealObserver.observe(item));
+} else {
+  revealItems.forEach((item) => item.classList.add("is-visible"));
+}
+
+// Gift letter
+const giftButton = byId("giftButton");
+const letter = byId("letter");
 giftButton.addEventListener("click", () => {
-  const open = letter.hidden;
-  letter.hidden = !open;
-  giftButton.setAttribute("aria-expanded", String(open));
-  giftButton.querySelector(".gift-box").textContent = open ? "💝" : "🎁";
-  giftButton.querySelector(".gift-label").textContent = open ? "اضغط لإغلاق الرسالة" : "اضغط لفتح الهدية";
-  if (open) {
-    if (!reduceMotion) launchConfetti(130);
-    letter.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "center" });
+  const opening = letter.hidden;
+  letter.hidden = !opening;
+  giftButton.setAttribute("aria-expanded", String(opening));
+  byId("giftLabel").textContent = opening ? "اقفل الرسالة" : "افتح رسالتك";
+  giftButton.querySelector(".gift-icon").textContent = opening ? "♥" : "✉";
+  if (opening) {
+    if (!reducedMotion) launchConfetti(90);
+    window.setTimeout(() => letter.scrollIntoView({
+      behavior: reducedMotion ? "auto" : "smooth",
+      block: "center"
+    }), 80);
   }
 });
 
-// Gallery lightbox.
-const lightbox = $("lightbox");
-const lightboxImage = $("lightboxImage");
-const lightboxClose = $("lightboxClose");
-let lastFocused = null;
-function closeLightbox() {
+// Gallery lightbox with keyboard and arrow navigation.
+const galleryCards = Array.from(document.querySelectorAll(".memory-card"));
+const lightbox = byId("lightbox");
+const lightboxImage = byId("lightboxImage");
+const lightboxCaption = byId("lightboxCaption");
+const lightboxCount = byId("lightboxCount");
+const closeButton = byId("lightboxClose");
+let currentImageIndex = 0;
+let previouslyFocused = null;
+
+function showGalleryImage(index) {
+  if (!galleryCards.length) return;
+  currentImageIndex = (index + galleryCards.length) % galleryCards.length;
+  const card = galleryCards[currentImageIndex];
+  const image = card.querySelector("img");
+  lightboxImage.src = card.dataset.full || image.src;
+  lightboxImage.alt = image.alt;
+  const caption = card.querySelector(".memory-meta b");
+  lightboxCaption.textContent = caption ? caption.textContent : image.alt;
+  lightboxCount.textContent = String(currentImageIndex + 1).padStart(2, "0") +
+    " / " + String(galleryCards.length).padStart(2, "0");
+}
+function openGallery(index, card) {
+  previouslyFocused = card;
+  showGalleryImage(index);
+  lightbox.hidden = false;
+  closeButton.focus();
+  document.body.style.overflow = "hidden";
+}
+function closeGallery() {
   lightbox.hidden = true;
   lightboxImage.src = "";
-  if (lastFocused) lastFocused.focus();
+  document.body.style.overflow = "";
+  if (previouslyFocused) previouslyFocused.focus();
 }
-document.querySelectorAll(".photo-card").forEach(card => {
-  card.addEventListener("click", () => {
-    lastFocused = card;
-    lightboxImage.src = card.dataset.full;
-    lightboxImage.alt = card.querySelector("img").alt;
-    lightbox.hidden = false;
-    lightboxClose.focus();
-  });
+galleryCards.forEach((card, index) => {
+  card.addEventListener("click", () => openGallery(index, card));
+  const image = card.querySelector("img");
+  image.addEventListener("error", () => card.classList.add("image-missing"));
 });
-lightboxClose.addEventListener("click", closeLightbox);
-lightbox.addEventListener("click", event => {
-  if (event.target === lightbox) closeLightbox();
+closeButton.addEventListener("click", closeGallery);
+byId("lightboxPrev").addEventListener("click", () => showGalleryImage(currentImageIndex - 1));
+byId("lightboxNext").addEventListener("click", () => showGalleryImage(currentImageIndex + 1));
+lightbox.addEventListener("click", (event) => {
+  if (event.target === lightbox) closeGallery();
 });
-document.addEventListener("keydown", event => {
-  if (event.key === "Escape" && !lightbox.hidden) closeLightbox();
-});
-
-// Wish button and celebration effects.
-$("wishButton").addEventListener("click", () => {
-  $("wishResult").textContent = "يا رب تكون سنة كلها خير ونجاح وأخبار حلوة يا نور! ✨";
-  if (!reduceMotion) launchConfetti(170);
+document.addEventListener("keydown", (event) => {
+  if (lightbox.hidden) return;
+  if (event.key === "Escape") closeGallery();
+  if (event.key === "ArrowLeft") showGalleryImage(currentImageIndex + 1);
+  if (event.key === "ArrowRight") showGalleryImage(currentImageIndex - 1);
 });
 
-// Share the page using the native share sheet when available.
-$("shareButton").addEventListener("click", async () => {
-  const data = {
-    title: "عيد ميلاد سعيد يا نور الدين",
+// Wishes and celebration
+byId("wishButton").addEventListener("click", () => {
+  byId("wishResult").textContent = "يا رب تكون سنة كلها خير ونجاح وأخبار تفرّح قلبك يا نور! ✨";
+  if (!reducedMotion) launchConfetti(150);
+});
+
+// Native share where available; otherwise copy the page link.
+byId("shareButton").addEventListener("click", async () => {
+  const shareData = {
+    title: "إلى نور الدين — يومك المميز",
     text: "كل سنة وأنت طيب يا نور الدين! 🎂✨",
     url: window.location.href
   };
   try {
     if (navigator.share) {
-      await navigator.share(data);
+      await navigator.share(shareData);
     } else if (navigator.clipboard && window.isSecureContext) {
       await navigator.clipboard.writeText(window.location.href);
-      $("shareButton").textContent = "تم نسخ الرابط ✓";
+      byId("shareButton").innerHTML = "تم نسخ الرابط <span>✓</span>";
     } else {
       window.prompt("انسخ رابط الموقع:", window.location.href);
     }
@@ -140,50 +168,60 @@ $("shareButton").addEventListener("click", async () => {
   }
 });
 
-// Lightweight gold confetti.
-const canvas = $("confetti");
-const ctx = canvas.getContext("2d");
+// Lightweight gold confetti. Animation runs only while particles exist.
+const canvas = byId("confetti");
+const context = canvas.getContext("2d");
 let particles = [];
+let animationFrame = 0;
+
 function resizeCanvas() {
   const ratio = Math.min(window.devicePixelRatio || 1, 2);
   canvas.width = Math.floor(window.innerWidth * ratio);
   canvas.height = Math.floor(window.innerHeight * ratio);
-  ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+  context.setTransform(ratio, 0, 0, ratio, 0, 0);
 }
 window.addEventListener("resize", resizeCanvas, { passive: true });
 resizeCanvas();
-function launchConfetti(amount = 120) {
-  const colors = ["#e8ca7b", "#c69c43", "#fff0bd", "#a98237", "#f7e5b1"];
+
+function launchConfetti(amount = 110) {
+  const palette = ["#e8ca7b", "#c69c43", "#fff0bd", "#a98237", "#f7e5b1"];
   for (let i = 0; i < amount; i++) {
     particles.push({
       x: Math.random() * window.innerWidth,
-      y: -20 - Math.random() * window.innerHeight * .35,
-      vx: (Math.random() - .5) * 4,
-      vy: 2 + Math.random() * 4,
-      size: 3 + Math.random() * 5,
+      y: -20 - Math.random() * window.innerHeight * 0.3,
+      vx: (Math.random() - 0.5) * 3.8,
+      vy: 2 + Math.random() * 3.5,
+      size: 3 + Math.random() * 4,
       rotation: Math.random() * 6,
-      spin: (Math.random() - .5) * .18,
-      color: colors[Math.floor(Math.random() * colors.length)],
-      life: 150 + Math.random() * 100
+      spin: (Math.random() - 0.5) * 0.16,
+      color: palette[Math.floor(Math.random() * palette.length)],
+      life: 130 + Math.random() * 90
     });
   }
+  if (!animationFrame) animationFrame = window.requestAnimationFrame(animateConfetti);
 }
 function animateConfetti() {
-  ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-  particles = particles.filter(p => p.life > 0 && p.y < window.innerHeight + 30);
-  for (const p of particles) {
-    p.x += p.vx;
-    p.y += p.vy;
-    p.vy += .025;
-    p.rotation += p.spin;
-    p.life--;
-    ctx.save();
-    ctx.translate(p.x, p.y);
-    ctx.rotate(p.rotation);
-    ctx.fillStyle = p.color;
-    ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * .65);
-    ctx.restore();
+  context.clearRect(0, 0, window.innerWidth, window.innerHeight);
+  particles = particles.filter((particle) =>
+    particle.life > 0 && particle.y < window.innerHeight + 25
+  );
+  for (const particle of particles) {
+    particle.x += particle.vx;
+    particle.y += particle.vy;
+    particle.vy += 0.025;
+    particle.rotation += particle.spin;
+    particle.life -= 1;
+    context.save();
+    context.translate(particle.x, particle.y);
+    context.rotate(particle.rotation);
+    context.fillStyle = particle.color;
+    context.fillRect(-particle.size / 2, -particle.size / 2, particle.size, particle.size * 0.65);
+    context.restore();
   }
-  window.requestAnimationFrame(animateConfetti);
+  if (particles.length) {
+    animationFrame = window.requestAnimationFrame(animateConfetti);
+  } else {
+    context.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    animationFrame = 0;
+  }
 }
-if (!reduceMotion) animateConfetti();
