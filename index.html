@@ -1,63 +1,110 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#090909">
-  <meta name="description" content="مفاجأة عيد ميلاد نور الدين — يوم مميز لشخص مميز.">
-  <title>عيد ميلاد سعيد يا نور الدين 🎂</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#080808">
+  <meta name="description" content="ليلة مميزة وتهنئة خاصة بعيد ميلاد نور الدين — 22 نوفمبر 2026.">
+  <meta property="og:title" content="كل سنة وأنت طيب يا نور الدين">
+  <meta property="og:description" content="مفاجأة صغيرة في يوم كبير ومميز ✨">
+  <title>عيد ميلاد سعيد يا نور الدين ✦</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=3">
 </head>
 <body>
+  <a class="skip-link" href="#main">انتقل إلى المحتوى</a>
+  <div class="ambient ambient-one" aria-hidden="true"></div>
+  <div class="ambient ambient-two" aria-hidden="true"></div>
   <canvas id="confetti" aria-hidden="true"></canvas>
-  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+
   <header class="topbar">
-    <a class="brand" href="#home"><span class="brand-mark">N</span><span>ليلة نور الدين</span></a>
-    <button class="music-toggle" id="musicToggle" type="button" aria-label="تشغيل الموسيقى">♫ <span>الموسيقى</span></button>
+    <a class="brand" href="#home" aria-label="العودة إلى البداية"><span class="brand-mark">N</span><span>ليلة نور الدين</span></a>
+    <nav class="nav-links" aria-label="التنقل الرئيسي">
+      <a href="#countdownSection">العد التنازلي</a>
+      <a href="#memories">الذكريات</a>
+      <a href="#surprise">المفاجأة</a>
+    </nav>
+    <button class="music-toggle" id="musicToggle" type="button" aria-pressed="false"><span class="music-icon">♫</span><span id="musicLabel">تشغيل الموسيقى</span></button>
   </header>
-  <main>
+
+  <main id="main">
     <section class="hero section" id="home">
-      <div class="eyebrow"><span class="dot"></span> يوم استثنائي لشخص استثنائي</div>
-      <p class="small-title">بكل الحب والفرحة نقول...</p>
-      <h1>عيد ميلاد<br><span class="gold-text">نور الدين</span></h1>
-      <p class="hero-copy">النهارده مش مجرد تاريخ في التقويم… ده يوم ميلاد شخص وجوده بيضيف للحياة معنى وفرحة.</p>
-      <div class="hero-actions"><a class="button button-gold" href="#surprise">افتح مفاجأتك <span>✦</span></a><a class="button button-ghost" href="#memories">شوف الذكريات</a></div>
-      <div class="scroll-hint">انزل واكتشف المفاجأة <span>↓</span></div>
-      <div class="hero-orbit orbit-a"></div><div class="hero-orbit orbit-b"></div>
-      <div class="hero-star star-a">✦</div><div class="hero-star star-b">✧</div>
+      <div class="hero-content">
+        <div class="eyebrow"><span class="dot"></span> يوم استثنائي لشخص استثنائي</div>
+        <p class="small-title">في يوم زي ده، الدنيا بقت أحلى...</p>
+        <h1>عيد ميلاد<br><span class="gold-text">نور الدين</span></h1>
+        <p class="hero-copy">مش مجرد يوم عادي؛ دي حكاية شخص غالي، وضحكة بتنوّر المكان، وسنة جديدة نتمنى تكون أجمل من كل اللي فات.</p>
+        <div class="hero-actions">
+          <a class="button button-gold" href="#surprise">افتح مفاجأتك <span>✦</span></a>
+          <a class="button button-ghost" href="#memories">شوف الذكريات</a>
+        </div>
+        <div class="hero-date"><span>22</span><i></i><span>11</span><i></i><span>2026</span></div>
+      </div>
+      <div class="hero-decoration" aria-hidden="true"><div class="orbit orbit-a"></div><div class="orbit orbit-b"></div><span class="hero-star star-a">✦</span><span class="hero-star star-b">✧</span><span class="hero-star star-c">✦</span></div>
+      <a class="scroll-hint" href="#countdownSection">اكتشف المفاجأة <span>↓</span></a>
     </section>
-    <section class="countdown-section section">
-      <div class="section-heading"><span class="kicker">SAVE THE DATE</span><h2>اللحظة المنتظرة قربت</h2><p>22 نوفمبر 2026</p></div>
+
+    <section class="countdown-section section" id="countdownSection">
+      <div class="section-heading"><span class="kicker">THE BIG DAY</span><h2>اللحظة المنتظرة قربت</h2><p>نستقبل يومك بكل فرحة وحب</p></div>
       <div class="countdown" id="countdown" aria-live="polite">
-        <div class="time-card"><strong id="days">00</strong><span>يوم</span></div><div class="time-card"><strong id="hours">00</strong><span>ساعة</span></div><div class="time-card"><strong id="minutes">00</strong><span>دقيقة</span></div><div class="time-card"><strong id="seconds">00</strong><span>ثانية</span></div>
+        <div class="time-card"><strong id="days">00</strong><span>يوم</span></div>
+        <div class="time-card"><strong id="hours">00</strong><span>ساعة</span></div>
+        <div class="time-card"><strong id="minutes">00</strong><span>دقيقة</span></div>
+        <div class="time-card"><strong id="seconds">00</strong><span>ثانية</span></div>
       </div>
       <p class="countdown-note" id="countdownNote">كل ثانية بتقربنا من يوم مليان فرحة ✨</p>
     </section>
-    <section class="message-section section" id="surprise">
-      <div class="section-heading"><span class="kicker">A LITTLE SURPRISE</span><h2>فيه حاجة مستنياك يا نور</h2><p>اضغط على الهدية وافتح رسالتك الخاصة</p></div>
-      <button class="gift-wrap" id="giftButton" type="button" aria-label="افتح الهدية"><span class="gift-glow"></span><span class="gift-box">🎁</span><span class="gift-label">اضغط لفتح الهدية</span></button>
-      <article class="letter" id="letter" hidden><div class="letter-icon">✦</div><h3>إلى نور الدين</h3><p>كل سنة وأنت طيب يا نور الدين! أتمنى لك سنة جديدة مليانة نجاح وراحة بال وضحك وذكريات حلوة. ربنا يحقق لك اللي بتتمناه، وتفضل دايمًا منوّر حياة اللي حواليك. وجودك في حياة أصحابك نعمة، والنهارده فرصتنا نقول لك قد إيه أنت شخص غالي ومميز. 🎂</p><span class="letter-sign">مع أطيب الأمنيات ❤️</span></article>
-    </section>
+
     <section class="memories-section section" id="memories">
-      <div class="section-heading"><span class="kicker">GOOD TIMES</span><h2>ذكريات تستاهل تتعاش</h2><p>المكان ده لصوركم ولحظاتكم المميزة</p></div>
+      <div class="section-heading"><span class="kicker">A LITTLE GALLERY</span><h2>حكايات وصور بتفضل في القلب</h2><p>كل صورة وراها ذكرى تستاهل نفتكرها</p></div>
       <div class="gallery">
-        <figure class="photo-card photo-large"><img id="photo1" src="images/photo-1.jpg" alt="ذكرى جميلة لنور الدين" loading="lazy"><span>لحظة ما تتنسيش</span></figure>
-        <figure class="photo-card"><img id="photo2" src="images/photo-2.jpg" alt="أحلى صحبة" loading="lazy"><span>أحلى صحبة</span></figure>
-        <figure class="photo-card"><img id="photo3" src="images/photo-3.jpg" alt="ضحكة من القلب" loading="lazy"><span>ضحكة من القلب</span></figure>
-        <figure class="photo-card"><img id="photo4" src="images/photo-4.jpg" alt="أيام لا تُنسى" loading="lazy"><span>أيام لا تُنسى</span></figure>
-        <figure class="photo-card"><img id="photo5" src="images/photo-5.jpg" alt="ذكرى مميزة" loading="lazy"><span>ذكرى مميزة</span></figure>
-        <figure class="photo-card"><img id="photo6" src="images/photo-6.jpg" alt="نور الدين" loading="lazy"><span>نور الدين</span></figure>
+        <button class="photo-card photo-large" type="button" data-full="images/photo-1.jpg" aria-label="عرض الصورة الأولى"><img src="images/photo-1.jpg" alt="ذكرى جميلة لنور الدين" loading="lazy"><span>لحظة ما تتنسيش <b>↗</b></span></button>
+        <button class="photo-card" type="button" data-full="images/photo-2.jpg" aria-label="عرض الصورة الثانية"><img src="images/photo-2.jpg" alt="أحلى صحبة" loading="lazy"><span>أحلى صحبة <b>↗</b></span></button>
+        <button class="photo-card" type="button" data-full="images/photo-3.jpg" aria-label="عرض الصورة الثالثة"><img src="images/photo-3.jpg" alt="ضحكة من القلب" loading="lazy"><span>ضحكة من القلب <b>↗</b></span></button>
+        <button class="photo-card" type="button" data-full="images/photo-4.jpg" aria-label="عرض الصورة الرابعة"><img src="images/photo-4.jpg" alt="أيام لا تُنسى" loading="lazy"><span>أيام لا تُنسى <b>↗</b></span></button>
+        <button class="photo-card" type="button" data-full="images/photo-5.jpg" aria-label="عرض الصورة الخامسة"><img src="images/photo-5.jpg" alt="ذكرى مميزة" loading="lazy"><span>ذكرى مميزة <b>↗</b></span></button>
+        <button class="photo-card" type="button" data-full="images/photo-6.jpg" aria-label="عرض الصورة السادسة"><img src="images/photo-6.jpg" alt="نور الدين" loading="lazy"><span>ذكريات العمر <b>↗</b></span></button>
       </div>
-      <p class="helper-text">أجمل الصور والذكريات الخاصة بنور الدين ✨</p>
+      <p class="gallery-note">اضغط على أي صورة لمشاهدتها بالحجم الكبير ✨</p>
     </section>
-    <section class="wishes-section section"><div class="section-heading"><span class="kicker">MAKE A WISH</span><h2>أمنية للسنة الجديدة</h2><p>خد نفس عميق، وفكّر في أمنية جميلة ✨</p></div><div class="cake">🎂</div><button class="button button-gold" id="wishButton" type="button">أطلق الأمنيات ✨</button><p class="wish-result" id="wishResult" aria-live="polite"></p></section>
-    <section class="final-section section"><div class="final-stars">✦　✧　✦</div><h2>كل سنة وأنت طيب<br><span class="gold-text">يا نور الدين</span></h2><p>سنة جديدة، حكايات أجمل، ونجاحات أكبر. أتمنى لك أيامًا تشبه قلبك الجميل.</p><button class="button button-ghost" id="shareButton" type="button">شارك التهنئة ↗</button></section>
+
+    <section class="message-section section" id="surprise">
+      <div class="section-heading"><span class="kicker">A SPECIAL SURPRISE</span><h2>رسالة مخصوصة ليك يا نور</h2><p>فيه كلام حلو مستنيك... افتح هديتك</p></div>
+      <button class="gift-wrap" id="giftButton" type="button" aria-expanded="false" aria-controls="letter">
+        <span class="gift-glow"></span><span class="gift-box" aria-hidden="true">🎁</span><span class="gift-label">اضغط لفتح الهدية</span>
+      </button>
+      <article class="letter" id="letter" hidden>
+        <div class="letter-icon">✦</div><h3>إلى نور الدين</h3>
+        <p>كل سنة وأنت طيب يا نور الدين! أتمنى لك سنة جديدة مليانة نجاح وراحة بال وضحك وذكريات حلوة. ربنا يحقق لك اللي بتتمناه، ويفتح لك كل أبواب الخير، وتفضل دايمًا منوّر حياة اللي حواليك. تستاهل كل حاجة جميلة، ويارب أيامك الجاية تكون أحلى وأجمل. 🎂</p>
+        <span class="letter-sign">مع أطيب الأمنيات والمحبة ♥</span>
+      </article>
+    </section>
+
+    <section class="wishes-section section">
+      <div class="section-heading"><span class="kicker">MAKE A WISH</span><h2>أمنية للسنة الجديدة</h2><p>فكّر في أمنية جميلة وخلي السنة دي بداية لحاجات أحلى</p></div>
+      <div class="cake" aria-hidden="true">🎂</div>
+      <button class="button button-gold" id="wishButton" type="button">أطلق الأمنيات ✨</button>
+      <p class="wish-result" id="wishResult" aria-live="polite"></p>
+    </section>
+
+    <section class="final-section section">
+      <div class="final-stars" aria-hidden="true">✦　✧　✦</div>
+      <p class="final-kicker">ONE MORE THING...</p>
+      <h2>كل سنة وأنت طيب<br><span class="gold-text">يا نور الدين</span></h2>
+      <p>سنة جديدة، حكايات أجمل، ونجاحات أكبر. أتمنى لك أيامًا تشبه قلبك الجميل.</p>
+      <button class="button button-ghost" id="shareButton" type="button">شارك التهنئة ↗</button>
+    </section>
   </main>
-  <footer>صُنعت بمحبة خصيصًا ليوم نور الدين <span>♥</span> <small>22 · 11 · 2026</small></footer>
-  <audio id="birthdayAudio" loop preload="none"><source src="birthday.mp3" type="audio/mpeg"></audio>
-  <script src="script.js"></script>
+
+  <div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="عرض الصورة">
+    <button class="lightbox-close" id="lightboxClose" type="button" aria-label="إغلاق الصورة">×</button>
+    <img id="lightboxImage" src="" alt="صورة من الذكريات">
+  </div>
+
+  <footer><span>صُنعت بمحبة خصيصًا ليوم نور الدين</span><b>♥</b><small>22 · 11 · 2026</small></footer>
+  <audio id="birthdayAudio" src="birthday.mp3" preload="auto" autoplay loop playsinline></audio>
+  <script src="script.js?v=3"></script>
 </body>
 </html>
